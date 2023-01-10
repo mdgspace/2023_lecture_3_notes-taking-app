@@ -1,0 +1,33 @@
+.btns{
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    justify-content: end;
+
+}
+.card{
+    margin: 30px;
+    padding: 10px;
+    width: 20vw;
+    border-bottom: 5px solid purple;
+}
+.pin{
+    padding: 0 5px;
+    font-size: 20px;
+}
+.edit, .delete{
+    padding: 0 5px;
+
+    font-size: 20px;
+}
+.card-title{
+    font-size: 20px;
+    font-weight: 700;
+    padding: 0 15px;
+    
+}
+.time{
+    display: flex;
+    padding: 15px;
+    justify-content: end;
+}

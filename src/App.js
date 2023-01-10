@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from './components/Navbar'
 import NotesCont from './components/NotesCont'
+import TodoCard from './components/TodoCard'
 import "./styles/global.css"
 
 const App = () => {
@@ -8,6 +9,11 @@ const App = () => {
     <>
       <Navbar />
       <NotesCont />
+      <TodoCard/>
+      <TodoCard/>
+      <TodoCard/>
+      <TodoCard/>
+      <TodoCard/>
     </>
   )
 }

@@ -2,35 +2,38 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import NoteCard from "./NoteCard";
 
-const temp = [
-  {
-    title: "The Dug of wars",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minusnecessitatibus tenetur accusamus magnam vero labore odit assumenda eligendi sint corporis.",
-    isPin: false,
-  },
-];
-
 const NotesCont = () => {
-  const [notes, setNotes] = useState(temp);
+  const [notes, setNotes] = useState([]);
 
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await axios.get("");
-        setNotes(response);
+        const username = "nikhil";
+        const response = await axios.get(
+          `http://localhost:8000/notes/${username}`
+        );
+        const data = response.data;
+        const pinned = [];
+        const unpinned = [];
+
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].isPin) pinned.push(data[i]);
+          else unpinned.push(data[i]);
+        }
+        console.log(pinned, unpinned);
+        setNotes([...pinned, ...unpinned]);
       } catch (error) {
         console.log(error);
       }
     };
-    // fetchNotes()
+    fetchNotes();
   }, []);
 
   return (
     <>
       <div className="notes-cont">
         {notes.map((note) => {
-          return <NoteCard note={note} />;
+          return <NoteCard key={note.id} note={note} />;
         })}
       </div>
     </>

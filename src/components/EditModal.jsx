@@ -1,11 +1,16 @@
 import axios from "axios";
-import React from "react";
+import React, { useRef } from "react";
 import Modal from "./Modal";
 
 const EditModal = ({ setEditModal, note }) => {
+  const titleRef = useRef();
+  const descriptionRef = useRef();
   const updateNote = async () => {
     try {
-      axios.post("/", {});
+      axios.patch(`http://localhost:8000/notes/${note.id}`, {
+        title: titleRef.current.value,
+        text: descriptionRef.current.value,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -17,6 +22,7 @@ const EditModal = ({ setEditModal, note }) => {
           <h1 className="modal-title fs-5" id="staticBackdropLabel">
             <input
               className="form-control"
+              ref={titleRef}
               type="text"
               placeholder="Title"
               defaultValue={note.title}
@@ -31,10 +37,11 @@ const EditModal = ({ setEditModal, note }) => {
         </div>
         <div className="modal-body mb-2">
           <textarea
+            ref={descriptionRef}
             className="form-control"
             placeholder="Description"
             rows="5"
-            defaultValue={note.description}
+            defaultValue={note.text}
           ></textarea>
         </div>
         <div className="modal-footer">

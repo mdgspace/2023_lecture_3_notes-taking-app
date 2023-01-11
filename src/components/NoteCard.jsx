@@ -15,7 +15,7 @@ const NoteCard = ({ note }) => {
 
   const updatePin = async (pinned) => {
     try {
-      await axios.post("", {
+      await axios.patch(`http://localhost:8000/notes/${note.id}`, {
         isPin: pinned,
       });
     } catch (error) {
@@ -35,7 +35,7 @@ const NoteCard = ({ note }) => {
 
   const deleteNote = async () => {
     try {
-      await axios.delete("");
+      await axios.delete(`http://localhost:8000/notes/${note.id}`);
     } catch (error) {
       console.log(error);
     }
@@ -56,9 +56,9 @@ const NoteCard = ({ note }) => {
         </div>
         <div onClick={() => setViewModal(true)}>
           <div className="card-title">{note.title}</div>
-          <div className="card-body">{note.description}</div>
+          <div className="card-body">{note.text}</div>
         </div>
-        <div className="time">10 Jan 2021</div>
+        <div className="time">{note.updated_at}</div>
       </div>
 
       {viewModal && <ViewModal setViewModal={setViewModal} note={note} />}

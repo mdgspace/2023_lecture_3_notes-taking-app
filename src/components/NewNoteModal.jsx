@@ -1,11 +1,18 @@
 import axios from "axios";
-import React from "react";
+import React, { useRef } from "react";
 import Modal from "./Modal";
 
 const NewNoteModal = ({ setNewNoteModal }) => {
+  const titleRef = useRef();
+  const descriptionRef = useRef();
+
   const saveNote = async () => {
     try {
-      // await axios.post("", {});
+      await axios.post("http://localhost:8000/notes/", {
+        author: "nikhil",
+        title: titleRef.current.value,
+        text: descriptionRef.current.value,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -15,7 +22,12 @@ const NewNoteModal = ({ setNewNoteModal }) => {
       <div className="modal-content">
         <div className="modal-header mb-2">
           <h1 className="modal-title fs-5">
-            <input className="form-control" type="text" placeholder="Title" />
+            <input
+              ref={titleRef}
+              className="form-control"
+              type="text"
+              placeholder="Title"
+            />
           </h1>
           <button
             type="button"
@@ -26,6 +38,7 @@ const NewNoteModal = ({ setNewNoteModal }) => {
         </div>
         <div className="modal-body mb-2">
           <textarea
+            ref={descriptionRef}
             className="form-control"
             placeholder="Description"
             rows="5"

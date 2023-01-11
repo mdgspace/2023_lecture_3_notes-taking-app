@@ -16,7 +16,7 @@ const ViewModal = ({ setViewModal, note }) => {
             onClick={() => setViewModal(false)}
           ></button>
         </div>
-        <div className="modal-body mb-2">{note.description}</div>
+        <div className="modal-body mb-2">{note.text}</div>
       </div>
     </Modal>
   );

@@ -16,7 +16,7 @@ const EditModal = ({ setEditModal, note }) => {
         <div className="modal-header mb-2">
           <h1 className="modal-title fs-5" id="staticBackdropLabel">
             <input
-              class="form-control"
+              className="form-control"
               type="text"
               placeholder="Title"
               defaultValue={note.title}
@@ -31,7 +31,7 @@ const EditModal = ({ setEditModal, note }) => {
         </div>
         <div className="modal-body mb-2">
           <textarea
-            class="form-control"
+            className="form-control"
             placeholder="Description"
             rows="5"
             defaultValue={note.description}

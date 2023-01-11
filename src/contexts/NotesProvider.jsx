@@ -1,19 +1,23 @@
+import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import NoteCard from "./NoteCard";
+
+const NotesContext = createContext();
+
+const useNotesContext = () => {
+  return useContext(NotesContext);
+};
 
 const temp = [
   {
     title: "The Dug of wars",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minusnecessitatibus tenetur accusamus magnam vero labore odit assumenda eligendi sint corporis.",
-    isPin: false,
   },
 ];
 
-const NotesCont = () => {
+const NotesProvider = ({ children }) => {
   const [notes, setNotes] = useState(temp);
-
+  console.log(notes);
   useEffect(() => {
     const fetchNotes = async () => {
       try {
@@ -25,16 +29,12 @@ const NotesCont = () => {
     };
     // fetchNotes()
   }, []);
-
+  const value = { notes, setNotes };
   return (
-    <>
-      <div className="notes-cont">
-        {notes.map((note) => {
-          return <NoteCard note={note} />;
-        })}
-      </div>
-    </>
+    <NotesContext.Provider value={value}>{children}</NotesContext.Provider>
   );
 };
 
-export default NotesCont;
+export default NotesProvider;
+
+export { useNotesContext };

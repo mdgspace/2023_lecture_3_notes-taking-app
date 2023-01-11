@@ -11,7 +11,7 @@ import axios from "axios";
 const NoteCard = ({ note }) => {
   const [viewModal, setViewModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
-  const [isPInned, setIsPinned] = useState(false);
+  const [isPInned, setIsPinned] = useState(note.isPin);
 
   const updatePin = async (pinned) => {
     try {

@@ -5,7 +5,7 @@ import Modal from "./Modal";
 const NewNoteModal = ({ setNewNoteModal }) => {
   const saveNote = async () => {
     try {
-      await axios.post("", {});
+      // await axios.post("", {});
     } catch (error) {
       console.log(error);
     }
@@ -15,7 +15,7 @@ const NewNoteModal = ({ setNewNoteModal }) => {
       <div className="modal-content">
         <div className="modal-header mb-2">
           <h1 className="modal-title fs-5">
-            <input class="form-control" type="text" placeholder="Title" />
+            <input className="form-control" type="text" placeholder="Title" />
           </h1>
           <button
             type="button"
@@ -26,7 +26,7 @@ const NewNoteModal = ({ setNewNoteModal }) => {
         </div>
         <div className="modal-body mb-2">
           <textarea
-            class="form-control"
+            className="form-control"
             placeholder="Description"
             rows="5"
           ></textarea>

@@ -1,22 +1,22 @@
 import React from "react";
 import Modal from "./Modal";
 
-const ViewModal = ({ setViewModal }) => {
+const ViewModal = ({ setViewModal, note }) => {
   return (
     <Modal>
       <div className="modal-content">
-        <div className="modal-header">
+        <div className="modal-header mb-2">
           <h1 className="modal-title fs-5" id="staticBackdropLabel">
-            Modal title
+            {note.title}
           </h1>
           <button
             type="button"
             className="btn-close"
             aria-label="Close"
-            onClick={() => setViewModal(-1)}
+            onClick={() => setViewModal(false)}
           ></button>
         </div>
-        <div className="modal-body">This is fantastic</div>
+        <div className="modal-body mb-2">{note.description}</div>
       </div>
     </Modal>
   );

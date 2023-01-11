@@ -6,7 +6,12 @@ const AddNewNote = () => {
   return (
     <>
       {newNoteModal && <NewNoteModal setNewNoteModal={setNewNoteModal} />}
-      <button onClick={() => setNewNoteModal(true)}>Add</button>
+      <button
+        className="add-btn btn btn-secondary"
+        onClick={() => setNewNoteModal(true)}
+      >
+        Add New Note
+      </button>
     </>
   );
 };

@@ -4,7 +4,7 @@ const Modal = ({ children }) => {
   return (
     <>
       <div className="c-modal-overlay" />
-      <div className="c-modal bg-white">{children}</div>
+      <div className="c-modal">{children}</div>
     </>
   );
 };

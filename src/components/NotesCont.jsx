@@ -1,29 +1,37 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import EditModal from "./EditModal";
 import NoteCard from "./NoteCard";
-import ViewModal from "./ViewModal";
-const arr = [1, 2, 3, 4, 5, 6, 7, 8];
+
+const temp = [
+  {
+    title: "The Dug of wars",
+    description:
+      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minusnecessitatibus tenetur accusamus magnam vero labore odit assumenda eligendi sint corporis.",
+  },
+];
 
 const NotesCont = () => {
-  const [viewModal, setViewModal] = useState(-1);
-  const [editModal, setEditModal] = useState(-1);
+  const [notes, setNotes] = useState(temp);
 
-  const openModal = (index, edit) => {
-    if (edit) setEditModal(index);
-    else setViewModal(index);
-  };
+  useEffect(() => {
+    const fetchNotes = async () => {
+      try {
+        const response = await axios.get("");
+        setNotes(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    // fetchNotes()
+  }, []);
 
-  // useEffect(() => {}, []);
   return (
     <>
       <div className="notes-cont">
-        {arr.map((note) => {
-          return <NoteCard openModal={openModal} />;
+        {notes.map((note) => {
+          return <NoteCard note={note} />;
         })}
       </div>
-      {viewModal !== -1 && <ViewModal setViewModal={setViewModal} />}
-
-      {editModal !== -1 && <EditModal setEditModal={setEditModal} />}
     </>
   );
 };

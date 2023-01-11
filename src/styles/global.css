@@ -1,5 +1,5 @@
 @import "./modal.css";
-@import './card.css';
+@import "./card.css";
 
 * {
   margin: 0%;
@@ -14,4 +14,21 @@ body {
 .profile-avatar {
   height: 2.2em;
   margin-left: 1em;
+}
+
+.notes-cont {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: center;
+  background-color: white;
+  margin: 2em;
+  border-radius: 1em;
+  padding: 1em;
+}
+
+@media only screen and (max-width: 760px) {
+  .notes-cont {
+    grid-template-columns: 1fr;
+  }
 }

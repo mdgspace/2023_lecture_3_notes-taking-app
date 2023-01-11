@@ -1,33 +1,50 @@
-.btns{
-    display: flex;
-    flex-direction: row;
-    padding: 15px;
-    justify-content: end;
+.btns {
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
+  justify-content: end;
+}
 
+.card {
+  padding: 10px;
+  border-bottom: 4px solid purple;
+  margin: 1em;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
 }
-.card{
-    margin: 30px;
-    padding: 10px;
-    width: 20vw;
-    border-bottom: 5px solid purple;
-}
-.pin{
-    padding: 0 5px;
-    font-size: 20px;
-}
-.edit, .delete{
-    padding: 0 5px;
 
-    font-size: 20px;
+.card:hover {
+  background-color: rgba(128, 0, 128, 0.6);
+  color: white;
+  border: none;
 }
-.card-title{
-    font-size: 20px;
-    font-weight: 700;
-    padding: 0 15px;
-    
+
+.pin {
+  padding: 0 5px;
+  font-size: 20px;
 }
-.time{
-    display: flex;
-    padding: 15px;
-    justify-content: end;
+
+.edit,
+.delete {
+  padding: 0 5px;
+  font-size: 20px;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 0 15px;
+}
+
+.time {
+  display: flex;
+  padding: 15px;
+  justify-content: flex-end;
+}
+
+.card-body,
+.card-title,
+.edit,
+.pin,
+.delete {
+  cursor: pointer;
 }

@@ -1,5 +1,5 @@
 @import "./modal.css";
-@import './card.css';
+@import "./card.css";
 
 * {
   margin: 0%;
@@ -8,10 +8,48 @@
 }
 
 body {
-  background-color: rgb(240, 243, 250);
+  background-color: rgb(222, 231, 253);
 }
 
 .profile-avatar {
   height: 2.2em;
   margin-left: 1em;
+}
+
+.navbar {
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.6);
+}
+
+.notes-cont {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: center;
+  background-color: white;
+  margin: 2em;
+  border-radius: 1em;
+  padding: 1em;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.6);
+  justify-content: center;
+}
+
+.add-btn {
+  margin-left: 3em;
+  margin-top: 1em;
+}
+
+.modal-content {
+  padding: 1em;
+  min-width: 40vw;
+}
+
+.modal-header h1 {
+  max-width: 70%;
+  flex-grow: 1;
+}
+
+@media only screen and (max-width: 760px) {
+  .notes-cont {
+    grid-template-columns: 1fr;
+  }
 }

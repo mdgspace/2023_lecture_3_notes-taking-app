@@ -1,18 +1,15 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import NotesCont from '../components/NotesCont'
-import TodoCard from '../components/TodoCard'
-
+import NoteCard from '../components/NoteCard'
+import AddNewNote from '../components/AddNewNote'
 const Todo = () => {
   return (
     <div>
-    <Navbar />
+     <Navbar />
+      {/* <NotesProvider> */}
+      <AddNewNote />
       <NotesCont />
-      <TodoCard/>
-      <TodoCard/>
-      <TodoCard/>
-      <TodoCard/>
-      <TodoCard/>
     </div>
   )
 }

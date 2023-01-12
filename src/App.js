@@ -1,18 +1,16 @@
 import React from 'react'
-import Navbar from './components/Navbar'
-import AddNewNote from './components/AddNewNote'
-import NotesCont from './components/NotesCont'
 import "./styles/global.css"
-import NotesProvider from './contexts/NotesProvider'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
     <>
-      <Navbar />
-      {/* <NotesProvider> */}
-      <AddNewNote />
-      <NotesCont />
-      {/* </NotesProvider> */}
+      <Routes>
+        <Route path={"/"} element={<Login />} />
+        <Route path={"/home"} element={<Home />} />
+      </Routes>
     </>
   )
 }

@@ -9,7 +9,7 @@ const NewNoteModal = ({ setNewNoteModal, notes, setNotes }) => {
   const saveNote = async () => {
     try {
       const newNote = {
-        author: "nikhil",
+        author: localStorage.getItem("username"),
         title: titleRef.current.value,
         text: descriptionRef.current.value,
       };

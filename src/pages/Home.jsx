@@ -9,7 +9,7 @@ const Home = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const username = "nikhil";
+        const username = localStorage.getItem("username");
         const response = await axios.get(
           `http://localhost:8000/notes/${username}`
         );

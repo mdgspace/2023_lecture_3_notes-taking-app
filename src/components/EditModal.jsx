@@ -2,15 +2,22 @@ import axios from "axios";
 import React, { useRef } from "react";
 import Modal from "./Modal";
 
-const EditModal = ({ setEditModal, note }) => {
+const EditModal = ({ setEditModal, note, notes, setNotes }) => {
   const titleRef = useRef();
   const descriptionRef = useRef();
   const updateNote = async () => {
     try {
-      axios.patch(`http://localhost:8000/notes/${note.id}`, {
+      const newNote = {
         title: titleRef.current.value,
         text: descriptionRef.current.value,
+      };
+      await axios.patch(`http://localhost:8000/notes/${note.id}`, newNote);
+      const newNotes = notes.filter((oldnote) => {
+        return oldnote.id !== note.id;
       });
+      setNotes([...newNotes, newNote]);
+      alert("Updated Successfully");
+      setEditModal(false);
     } catch (error) {
       console.log(error);
     }

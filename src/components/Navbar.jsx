@@ -6,7 +6,7 @@ const Navbar = () => {
     <div className="navbar bg-white p-3 ">
       <img alt="mdg-logo" src={mdg_logo} />
       <div>
-        username
+        {localStorage.getItem("username")}
         <img
           alt="profile-avatar"
           src={"https://api.multiavatar.com/kathrin.svg"}

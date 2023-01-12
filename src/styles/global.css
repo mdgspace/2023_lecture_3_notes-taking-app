@@ -1,6 +1,6 @@
 @import "./modal.css";
 @import "./card.css";
-
+@import './login.css';
 * {
   margin: 0%;
   padding: 0%;

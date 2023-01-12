@@ -8,16 +8,28 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
 import axios from "axios";
 
-const NoteCard = ({ note }) => {
+const NoteCard = ({ note, notes, setNotes }) => {
   const [viewModal, setViewModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [isPInned, setIsPinned] = useState(note.isPin);
 
   const updatePin = async (pinned) => {
     try {
-      await axios.patch(`http://localhost:8000/notes/${note.id}`, {
+      await axios.patch(`http://localhost:8000/notes/${note.id}/`, {
         isPin: pinned,
       });
+
+      const pinarr = [];
+      const unpinarr = [];
+
+      for (let i = 0; i < notes.length; i++) {
+        if (notes[i].id === note.id)
+          pinarr.push({ ...notes[i], isPin: pinned });
+        else if (notes[i].isPin) pinarr.push(notes[i]);
+        else unpinarr.push(notes[i]);
+      }
+      setNotes([...pinarr, ...unpinarr]);
+      console.log([...pinarr, ...unpinarr]);
     } catch (error) {
       console.log(error);
     }
@@ -35,11 +47,20 @@ const NoteCard = ({ note }) => {
 
   const deleteNote = async () => {
     try {
-      await axios.delete(`http://localhost:8000/notes/${note.id}`);
+      await axios.delete(`http://localhost:8000/notes/${note.id}/`);
+      const newNotes = notes.filter((oldnote) => {
+        return oldnote.id !== note.id;
+      });
+      setNotes(newNotes);
+      alert("Deleted");
     } catch (error) {
       console.log(error);
     }
   };
+  const date=new Date(note.updated_at);
+  const editedDate=date.toLocaleDateString()
+  const editedTime=date.toLocaleTimeString()
+  console.log(editedDate);
   return (
     <>
       <div className="card">
@@ -58,11 +79,18 @@ const NoteCard = ({ note }) => {
           <div className="card-title">{note.title}</div>
           <div className="card-body">{note.text}</div>
         </div>
-        <div className="time">{note.updated_at}</div>
+        <div className="time">{`${editedDate}  ${editedTime}`}</div>
       </div>
 
       {viewModal && <ViewModal setViewModal={setViewModal} note={note} />}
-      {editModal && <EditModal setEditModal={setEditModal} note={note} />}
+      {editModal && (
+        <EditModal
+          setEditModal={setEditModal}
+          note={note}
+          notes={notes}
+          setNotes={setNotes}
+        />
+      )}
     </>
   );
 };

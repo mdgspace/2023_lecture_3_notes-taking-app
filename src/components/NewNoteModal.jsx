@@ -2,17 +2,21 @@ import axios from "axios";
 import React, { useRef } from "react";
 import Modal from "./Modal";
 
-const NewNoteModal = ({ setNewNoteModal }) => {
+const NewNoteModal = ({ setNewNoteModal, notes, setNotes }) => {
   const titleRef = useRef();
   const descriptionRef = useRef();
 
   const saveNote = async () => {
     try {
-      await axios.post("http://localhost:8000/notes/", {
-        author: "nikhil",
+      const newNote = {
+        author: localStorage.getItem("username"),
         title: titleRef.current.value,
         text: descriptionRef.current.value,
-      });
+      };
+      await axios.post("http://localhost:8000/notes/", newNote);
+      setNotes([...notes, newNote]);
+      alert("Saved Successfully");
+      setNewNoteModal(false);
     } catch (error) {
       console.log(error);
     }

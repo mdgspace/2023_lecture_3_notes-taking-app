@@ -17,7 +17,6 @@ const temp = [
 
 const NotesProvider = ({ children }) => {
   const [notes, setNotes] = useState(temp);
-  console.log(notes);
   useEffect(() => {
     const fetchNotes = async () => {
       try {

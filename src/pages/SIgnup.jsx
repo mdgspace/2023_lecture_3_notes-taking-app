@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
-const Login = () => {
-const navigate=useNavigate()
+const SIgnup = () => {
+    const navigate=useNavigate()
 
     const INITIAL_DATA = {
         username: "",
@@ -17,33 +17,21 @@ const navigate=useNavigate()
             return { ...prev, ...fields }
         })
     }
-   const HandleSubmit= async(e)=>{
+   const HandleSubmit=async (e)=>{
        e.preventDefault()
        try {
         
-         const resp=await axios.post('http://localhost:8000/users/signin/',data)
-         setTimeout(() => {
-          
-           localStorage.setItem('username',resp.data)
-         }, 2000);
-
-         navigate('/home')
+           await axios.post("http://localhost:8000/users/signup/", data);
+           navigate('/login')
        } catch (error) {
-        alert('some error occured')
-       }
-      //  setTimeout(() => {
-      //      const isLoggedIn = localStorage.getItem('isLoggedIn')
-      //      isLoggedIn ? navigate('/home') : navigate('/')
         
-      //  }, 2000);
-      //  localStorage.setItem('isLoggedIn', true);
-      //  localStorage.setItem('name', data.name);
+       }
     }
     return (
 
         <div className="form-wrapper">
             <form action="" className='form'>
-               <h1>Login</h1>
+          <h1>Signup Form</h1>
                 
                 <input
                     autoFocus
@@ -70,4 +58,4 @@ const navigate=useNavigate()
     )
 }
 
-export default Login
+export default SIgnup

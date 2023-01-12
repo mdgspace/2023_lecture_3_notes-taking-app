@@ -42,7 +42,6 @@ const NoteCard = ({ note, notes, setNotes }) => {
         else unpinarr.push(notes[i]);
       }
       setNotes([...pinarr, ...unpinarr]);
-      console.log([...pinarr, ...unpinarr]);
     } catch (error) {
       console.log(error);
     }
@@ -70,6 +69,7 @@ const NoteCard = ({ note, notes, setNotes }) => {
       console.log(error);
     }
   };
+
   return (
     <>
       <div className="card">

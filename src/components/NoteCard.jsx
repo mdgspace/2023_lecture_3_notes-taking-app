@@ -8,6 +8,19 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
 import axios from "axios";
 
+const dateFormater = Intl.DateTimeFormat("en-us", {
+  dateStyle: "medium",
+  timeStyle: "short",
+});
+
+const formatter = (time) => {
+  if (time) {
+    const d = new Date(time);
+    return dateFormater.format(d);
+  }
+  return "";
+};
+
 const NoteCard = ({ note, notes, setNotes }) => {
   const [viewModal, setViewModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
@@ -75,7 +88,7 @@ const NoteCard = ({ note, notes, setNotes }) => {
           <div className="card-title">{note.title}</div>
           <div className="card-body">{note.text}</div>
         </div>
-        <div className="time">{note.updated_at}</div>
+        <div className="time">{formatter(note.updated_at)}</div>
       </div>
 
       {viewModal && <ViewModal setViewModal={setViewModal} note={note} />}

@@ -1,17 +1,18 @@
 import React from 'react'
-import "./styles/global.css"
 import Home from './pages/Home'
 import Login from './pages/Login'
 import { Routes, Route } from "react-router-dom";
-import SIgnup from './pages/SIgnup';
-import { all } from 'axios';
+import Signup from './pages/Signup';
+import "./styles/global.css";
+import Navbar from './components/Navbar';
 
 const App = () => {
   return (
     <>
+      <Navbar />
       <Routes>
-        <Route path={"/"} element={< SIgnup/>} />
-        <Route path={"/home"} element={<Home />} />
+        <Route path={"/"} element={<Home />} />
+        <Route path={"/signup"} element={< Signup />} />
         <Route path={"/login"} element={<Login />} />
       </Routes>
     </>
@@ -19,7 +20,3 @@ const App = () => {
 }
 
 export default App
-// /signin
-// /signup
-// /notes/username all
-// /notes/:id

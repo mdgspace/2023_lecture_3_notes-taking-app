@@ -11,11 +11,24 @@ const EditModal = ({ setEditModal, note, notes, setNotes }) => {
         title: titleRef.current.value,
         text: descriptionRef.current.value,
       };
-      await axios.patch(`http://localhost:8000/notes/${note.id}`, newNote);
+      const res = await axios.patch(
+        `http://localhost:8000/notes/${note.id}`,
+        newNote
+      );
       const newNotes = notes.filter((oldnote) => {
         return oldnote.id !== note.id;
       });
-      setNotes([...newNotes, newNote]);
+      const data = res.data;
+      setNotes([
+        ...newNotes,
+        {
+          title: data.title,
+          text: data.text,
+          updated_at: data.updated_at,
+          isPin: data.isPin,
+          id: data.id,
+        },
+      ]);
       alert("Updated Successfully");
       setEditModal(false);
     } catch (error) {

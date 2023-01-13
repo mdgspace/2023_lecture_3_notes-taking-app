@@ -13,8 +13,18 @@ const NewNoteModal = ({ setNewNoteModal, notes, setNotes }) => {
         title: titleRef.current.value,
         text: descriptionRef.current.value,
       };
-      await axios.post("http://localhost:8000/notes/", newNote);
-      setNotes([...notes, newNote]);
+      const res = await axios.post("http://localhost:8000/notes/", newNote);
+      const data = res.data;
+      setNotes([
+        ...notes,
+        {
+          title: data.title,
+          text: data.text,
+          updated_at: data.updated_at,
+          isPin: data.isPin,
+          id: data.id,
+        },
+      ]);
       alert("Saved Successfully");
       setNewNoteModal(false);
     } catch (error) {

@@ -1,20 +1,9 @@
-.form-wrapper{
-    display: flex;
-align-items: center;
-justify-content:center ;
-height: 100vh;
-flex-direction: column;
-}
-form{
-    display: flex;
-    padding: 10px;
-    border-bottom: 4px solid purple;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    padding: 30px;
-    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
-    flex-direction: column
-}
-form input{
-    margin: 20px 0;
+.c-form {
+  position: fixed;
+  border-radius: 1em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  min-width: 30vw;
 }

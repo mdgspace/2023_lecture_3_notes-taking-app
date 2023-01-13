@@ -28,20 +28,23 @@ const NoteCard = ({ note, notes, setNotes }) => {
 
   const updatePin = async (pinned) => {
     try {
-      await axios.patch(`http://localhost:8000/notes/${note.id}`, {
+      const res = await axios.patch(`http://localhost:8000/notes/${note.id}`, {
         isPin: pinned,
       });
-
-      const pinarr = [];
-      const unpinarr = [];
-
-      for (let i = 0; i < notes.length; i++) {
-        if (notes[i].id === note.id)
-          pinarr.push({ ...notes[i], isPin: pinned });
-        else if (notes[i].isPin) pinarr.push(notes[i]);
-        else unpinarr.push(notes[i]);
-      }
-      setNotes([...pinarr, ...unpinarr]);
+      const data = res.data;
+      const unchangesNotes = notes.filter((oldnote) => {
+        return oldnote.id !== note.id;
+      });
+      setNotes([
+        {
+          title: data.title,
+          text: data.text,
+          updated_at: data.updated_at,
+          isPin: data.isPin,
+          id: data.id,
+        },
+        ...unchangesNotes,
+      ]);
     } catch (error) {
       console.log(error);
     }

@@ -1,18 +1,18 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const usernameRef = useRef();
-  const passwordRef = useRef();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:8000/users/signup/", {
-        username: usernameRef.current.value,
-        password: passwordRef.current.value,
+        username: username,
+        password: password,
       });
       navigate("/login");
     } catch (error) {
@@ -28,14 +28,16 @@ const Signup = () => {
         required
         type="text"
         placeholder="username"
-        ref={usernameRef}
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
       />
       <input
         required
         className="form-control mb-3"
         type="password"
         placeholder="password"
-        ref={passwordRef}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
       />
       <button
         type="submit"

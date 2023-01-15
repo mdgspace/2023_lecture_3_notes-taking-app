@@ -1,17 +1,17 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import Modal from "./Modal";
 
 const NewNoteModal = ({ setNewNoteModal, notes, setNotes }) => {
-  const titleRef = useRef();
-  const descriptionRef = useRef();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   const saveNote = async () => {
     try {
       const newNote = {
         author: localStorage.getItem("username"),
-        title: titleRef.current.value,
-        text: descriptionRef.current.value,
+        title: title,
+        text: description,
       };
       const res = await axios.post("http://localhost:8000/notes/", newNote);
       const data = res.data;
@@ -37,9 +37,10 @@ const NewNoteModal = ({ setNewNoteModal, notes, setNotes }) => {
         <div className="modal-header mb-2">
           <h1 className="modal-title fs-5">
             <input
-              ref={titleRef}
+              value={title}
               className="form-control"
               type="text"
+              onChange={(e) => setTitle(e.target.value)}
               placeholder="Title"
             />
           </h1>
@@ -52,7 +53,8 @@ const NewNoteModal = ({ setNewNoteModal, notes, setNotes }) => {
         </div>
         <div className="modal-body mb-2">
           <textarea
-            ref={descriptionRef}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             className="form-control"
             placeholder="Description"
             rows="5"

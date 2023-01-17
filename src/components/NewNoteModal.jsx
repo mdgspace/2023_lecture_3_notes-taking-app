@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import Modal from "./Modal";
 
-const NewNoteModal = ({ setNewNoteModal, notes, setNotes }) => {
+const NewNoteModal = ({ setNewNoteModal, addNote }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -15,16 +15,15 @@ const NewNoteModal = ({ setNewNoteModal, notes, setNotes }) => {
       };
       const res = await axios.post("http://localhost:8000/notes/", newNote);
       const data = res.data;
-      setNotes([
-        ...notes,
-        {
-          title: data.title,
-          text: data.text,
-          updated_at: data.updated_at,
-          isPin: data.isPin,
-          id: data.id,
-        },
-      ]);
+
+      const note = {
+        title: data.title,
+        text: data.text,
+        updated_at: data.updated_at,
+        isPin: data.isPin,
+        id: data.id,
+      };
+      addNote(note);
       alert("Saved Successfully");
       setNewNoteModal(false);
     } catch (error) {

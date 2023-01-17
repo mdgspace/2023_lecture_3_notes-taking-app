@@ -7,66 +7,38 @@ import { BsPinAngleFill } from "react-icons/bs";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
 import axios from "axios";
+import dateformatter from "../utils/dateFormater";
 
-const dateFormater = Intl.DateTimeFormat("en-us", {
-  dateStyle: "medium",
-  timeStyle: "short",
-});
-
-const formatter = (time) => {
-  if (time) {
-    const d = new Date(time);
-    return dateFormater.format(d);
-  }
-  return "";
-};
-
-const NoteCard = ({ note, notes, setNotes }) => {
+const NoteCard = ({ note, deleteNote, updateNote }) => {
   const [viewModal, setViewModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [isPInned, setIsPinned] = useState(note.isPin);
 
-  const updatePin = async (pinned) => {
+  const HandlePin = async () => {
+    const togglePin = !isPInned;
     try {
       const res = await axios.patch(`http://localhost:8000/notes/${note.id}`, {
-        isPin: pinned,
+        isPin: togglePin,
       });
       const data = res.data;
-      const unchangesNotes = notes.filter((oldnote) => {
-        return oldnote.id !== note.id;
-      });
-      setNotes([
-        {
-          title: data.title,
-          text: data.text,
-          updated_at: data.updated_at,
-          isPin: data.isPin,
-          id: data.id,
-        },
-        ...unchangesNotes,
-      ]);
+      const updatedNote = {
+        title: data.title,
+        text: data.text,
+        updated_at: data.updated_at,
+        isPin: data.isPin,
+        id: data.id,
+      };
+      updateNote(note.id, updatedNote);
+      setIsPinned(togglePin);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const HandlePin = () => {
-    if (isPInned) {
-      updatePin(false);
-      setIsPinned(false);
-    } else {
-      updatePin(true);
-      setIsPinned(true);
-    }
-  };
-
-  const deleteNote = async () => {
+  const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:8000/notes/${note.id}`);
-      const newNotes = notes.filter((oldnote) => {
-        return oldnote.id !== note.id;
-      });
-      setNotes(newNotes);
+      deleteNote(note.id);
       alert("Deleted");
     } catch (error) {
       console.log(error);
@@ -80,7 +52,7 @@ const NoteCard = ({ note, notes, setNotes }) => {
           <div className="pin" onClick={HandlePin}>
             {isPInned ? <BsPinAngleFill /> : <BsPinAngle />}
           </div>
-          <div className="delete" onClick={deleteNote}>
+          <div className="delete" onClick={handleDelete}>
             <AiOutlineDelete />
           </div>
           <div className="edit" onClick={() => setEditModal(true)}>
@@ -91,7 +63,7 @@ const NoteCard = ({ note, notes, setNotes }) => {
           <div className="card-title">{note.title}</div>
           <div className="card-body">{note.text}</div>
         </div>
-        <div className="time">{formatter(note.updated_at)}</div>
+        <div className="time">{dateformatter(note.updated_at)}</div>
       </div>
 
       {viewModal && <ViewModal setViewModal={setViewModal} note={note} />}
@@ -99,8 +71,7 @@ const NoteCard = ({ note, notes, setNotes }) => {
         <EditModal
           setEditModal={setEditModal}
           note={note}
-          notes={notes}
-          setNotes={setNotes}
+          updateNote={updateNote}
         />
       )}
     </>

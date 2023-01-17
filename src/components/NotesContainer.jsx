@@ -1,7 +1,7 @@
 import React from "react";
 import NoteCard from "./NoteCard";
 
-const NotesCont = ({ notes, setNotes }) => {
+const NotesContainer = ({ notes, deleteNote, updateNote }) => {
   return (
     <>
       <div className="notes-cont">
@@ -10,8 +10,8 @@ const NotesCont = ({ notes, setNotes }) => {
             <NoteCard
               key={note.id}
               note={note}
-              notes={notes}
-              setNotes={setNotes}
+              deleteNote={deleteNote}
+              updateNote={updateNote}
             />
           );
         })}
@@ -20,4 +20,4 @@ const NotesCont = ({ notes, setNotes }) => {
   );
 };
 
-export default NotesCont;
+export default NotesContainer;

@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import mdg_logo from "../assests/images/mdg_logo.svg";
 
 const Navbar = () => {
-  function logout() {
+  const logout = () => {
     localStorage.setItem("username", "");
     window.location.reload();
-  }
+  };
 
   return (
     <div className="navbar bg-white p-3 ">

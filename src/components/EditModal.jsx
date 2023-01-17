@@ -2,39 +2,32 @@ import axios from "axios";
 import React, { useState } from "react";
 import Modal from "./Modal";
 
-const EditModal = ({ setEditModal, note, notes, setNotes }) => {
+const EditModal = ({ setEditModal, note, updateNote }) => {
   const [title, setTitle] = useState(note.title);
   const [description, setDescription] = useState(note.text);
-  const updateNote = async () => {
+  const EditNote = async () => {
     try {
-      const newNote = {
+      const res = await axios.patch(`http://localhost:8000/notes/${note.id}`, {
         title: title,
         text: description,
-      };
-      const res = await axios.patch(
-        `http://localhost:8000/notes/${note.id}`,
-        newNote
-      );
-      const newNotes = notes.filter((oldnote) => {
-        return oldnote.id !== note.id;
       });
+
       const data = res.data;
-      setNotes([
-        ...newNotes,
-        {
-          title: data.title,
-          text: data.text,
-          updated_at: data.updated_at,
-          isPin: data.isPin,
-          id: data.id,
-        },
-      ]);
+      const newNote = {
+        title: data.title,
+        text: data.text,
+        updated_at: data.updated_at,
+        isPin: data.isPin,
+        id: data.id,
+      };
+      updateNote(note.id, newNote);
       alert("Updated Successfully");
       setEditModal(false);
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <Modal>
       <div className="modal-content">
@@ -65,11 +58,7 @@ const EditModal = ({ setEditModal, note, notes, setNotes }) => {
           ></textarea>
         </div>
         <div className="modal-footer">
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={updateNote}
-          >
+          <button type="button" className="btn btn-primary" onClick={EditNote}>
             Update
           </button>
         </div>

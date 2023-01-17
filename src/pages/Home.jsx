@@ -1,12 +1,31 @@
 import React, { useState, useEffect } from "react";
-import NotesCont from "../components/NotesCont";
+import NotesContainer from "../components/NotesContainer";
 import AddNewNote from "../components/AddNewNote";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import reorderNotes from "../utils/reorderNotes";
 
 const Home = () => {
   const [notes, setNotes] = useState([]);
   const navigate = useNavigate();
+
+  const addNote = (note) => {
+    setNotes([...notes, note]);
+  };
+
+  const deleteNote = (deleteNoteId) => {
+    const newNotes = notes.filter((note) => {
+      return note.id !== deleteNoteId;
+    });
+    setNotes(newNotes);
+  };
+
+  const updateNote = (updateNoteId, newNote) => {
+    const unchangesNotes = notes.filter((note) => {
+      return note.id !== updateNoteId;
+    });
+    setNotes(reorderNotes([newNote, ...unchangesNotes]));
+  };
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -20,14 +39,7 @@ const Home = () => {
           `http://localhost:8000/notes/${username}`
         );
         const data = response.data;
-        const pinned = [];
-        const unpinned = [];
-
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].isPin) pinned.push(data[i]);
-          else unpinned.push(data[i]);
-        }
-        setNotes([...pinned, ...unpinned]);
+        setNotes(reorderNotes(data));
       } catch (error) {
         console.log(error);
       }
@@ -37,8 +49,12 @@ const Home = () => {
 
   return (
     <>
-      <AddNewNote notes={notes} setNotes={setNotes} />
-      <NotesCont notes={notes} setNotes={setNotes} />
+      <AddNewNote addNote={addNote} />
+      <NotesContainer
+        notes={notes}
+        updateNote={updateNote}
+        deleteNote={deleteNote}
+      />
     </>
   );
 };

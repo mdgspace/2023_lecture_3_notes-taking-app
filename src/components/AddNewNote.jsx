@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import NewNoteModal from "./NewNoteModal";
 
-const AddNewNote = ({ notes, setNotes }) => {
+const AddNewNote = ({ addNote }) => {
   const [newNoteModal, setNewNoteModal] = useState(false);
   return (
     <>
       {newNoteModal && (
-        <NewNoteModal
-          setNewNoteModal={setNewNoteModal}
-          notes={notes}
-          setNotes={setNotes}
-        />
+        <NewNoteModal setNewNoteModal={setNewNoteModal} addNote={addNote} />
       )}
       <button
         className="add-btn btn btn-secondary"

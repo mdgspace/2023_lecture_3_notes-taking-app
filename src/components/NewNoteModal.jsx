@@ -1,11 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import Modal from "./Modal";
 
 const NewNoteModal = ({ setNewNoteModal, addNote }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-
+let title='';
+let description='';
   const saveNote = async () => {
     try {
       const newNote = {
@@ -39,7 +38,7 @@ const NewNoteModal = ({ setNewNoteModal, addNote }) => {
               value={title}
               className="form-control"
               type="text"
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => title=e.target.value}
               placeholder="Title"
             />
           </h1>
@@ -52,11 +51,11 @@ const NewNoteModal = ({ setNewNoteModal, addNote }) => {
         </div>
         <div className="modal-body mb-2">
           <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => description=e.target.value}
             className="form-control"
             placeholder="Description"
             rows="5"
+            value={description}
           ></textarea>
         </div>
         <div className="modal-footer">

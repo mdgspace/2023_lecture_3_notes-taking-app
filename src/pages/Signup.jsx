@@ -4,7 +4,7 @@ import axios from "axios";
 
 const Signup = () => {
   const navigate = useNavigate();
-  let username,password;
+  let username, password;
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
@@ -27,16 +27,14 @@ const Signup = () => {
         required
         type="text"
         placeholder="username"
-        value={username}
-        onChange={(e) => username = e.target.value}
+        onChange={(e) => (username = e.target.value)}
       />
       <input
         required
         className="form-control mb-3"
         type="password"
         placeholder="password"
-        value={password}
-        onChange={(e) => password = e.target.value}
+        onChange={(e) => (password = e.target.value)}
       />
       <button
         type="submit"

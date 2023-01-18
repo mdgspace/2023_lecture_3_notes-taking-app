@@ -1,10 +1,11 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import Modal from "./Modal";
 
 const EditModal = ({ setEditModal, note, updateNote }) => {
-  const [title, setTitle] = useState(note.title);
-  const [description, setDescription] = useState(note.text);
+  let title = note.title,
+    description = note.text;
+
   const EditNote = async () => {
     try {
       const res = await axios.patch(`http://localhost:8000/notes/${note.id}`, {
@@ -37,8 +38,8 @@ const EditModal = ({ setEditModal, note, updateNote }) => {
               className="form-control"
               type="text"
               placeholder="Title"
-              onChange={(e) => setTitle(e.target.value)}
-              value={title}
+              onChange={(e) => (title = e.target.value)}
+              defaultValue={title}
             />
           </h1>
           <button
@@ -53,9 +54,9 @@ const EditModal = ({ setEditModal, note, updateNote }) => {
             className="form-control"
             placeholder="Description"
             rows="5"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          ></textarea>
+            onChange={(e) => (description = e.target.value)}
+            defaultValue={description}
+          />
         </div>
         <div className="modal-footer">
           <button type="button" className="btn btn-primary" onClick={EditNote}>

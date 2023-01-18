@@ -10,7 +10,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const addNote = (note) => {
-    setNotes([...notes, note]);
+    setNotes(reorderNotes([note, ...notes]));
   };
 
   const deleteNote = (deleteNoteId) => {

@@ -3,8 +3,7 @@ import React from "react";
 import Modal from "./Modal";
 
 const NewNoteModal = ({ setNewNoteModal, addNote }) => {
-let title='';
-let description='';
+  let title, description;
   const saveNote = async () => {
     try {
       const newNote = {
@@ -35,10 +34,9 @@ let description='';
         <div className="modal-header mb-2">
           <h1 className="modal-title fs-5">
             <input
-              value={title}
               className="form-control"
               type="text"
-              onChange={(e) => title=e.target.value}
+              onChange={(e) => (title = e.target.value)}
               placeholder="Title"
             />
           </h1>
@@ -51,11 +49,10 @@ let description='';
         </div>
         <div className="modal-body mb-2">
           <textarea
-            onChange={(e) => description=e.target.value}
+            onChange={(e) => (description = e.target.value)}
             className="form-control"
             placeholder="Description"
             rows="5"
-            value={description}
           ></textarea>
         </div>
         <div className="modal-footer">

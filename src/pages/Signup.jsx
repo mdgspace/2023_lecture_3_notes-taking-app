@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  let username,password;
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +28,7 @@ const Signup = () => {
         type="text"
         placeholder="username"
         value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        onChange={(e) => username = e.target.value}
       />
       <input
         required
@@ -37,7 +36,7 @@ const Signup = () => {
         type="password"
         placeholder="password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={(e) => password = e.target.value}
       />
       <button
         type="submit"

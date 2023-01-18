@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 const Login = () => {
   const navigate = useNavigate();
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
+  let username,password;
   const HandleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -21,6 +18,7 @@ const Login = () => {
       alert("some error occured");
     }
   };
+
   return (
     <form className="c-form bg-secondary p-3">
       <h3 className="mb-3">Login</h3>
@@ -30,7 +28,7 @@ const Login = () => {
         type="text"
         placeholder="username"
         value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        onChange={(e) => username = e.target.value}
       />
       <input
         className="form-control mb-3"
@@ -38,7 +36,7 @@ const Login = () => {
         type="password"
         placeholder="password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={(e) => password = e.target.value}
       />
       <button
         type="submit"

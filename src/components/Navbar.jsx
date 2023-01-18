@@ -7,15 +7,15 @@ const Navbar = () => {
     localStorage.setItem("username", "");
     window.location.reload();
   };
-
+  const userNameFromLocalStorage =localStorage.getItem("username")
   return (
     <div className="navbar bg-white p-3 ">
       <Link to="/">
         <img alt="mdg-logo" src={mdg_logo} />
       </Link>
-      {localStorage.getItem("username") && (
+      {userNameFromLocalStorage && (
         <div>
-          {localStorage.getItem("username")}
+          {userNameFromLocalStorage}
           <img
             alt="profile-avatar"
             src={"https://api.multiavatar.com/kathrin.svg"}

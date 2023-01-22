@@ -8,10 +8,13 @@ const EditModal = ({ setEditModal, note, updateNote }) => {
 
   const EditNote = async () => {
     try {
-      const res = await axios.patch(`http://localhost:8000/notes/${note.id}`, {
-        title: title,
-        text: description,
-      });
+      const res = await axios.patch(
+        `https://nanonish.pythonanywhere.com/notes/${note.id}`,
+        {
+          title: title,
+          text: description,
+        }
+      );
 
       const data = res.data;
       const newNote = {

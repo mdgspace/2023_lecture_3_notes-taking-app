@@ -6,6 +6,8 @@
   z-index: 10;
   background-color: rgb(240, 243, 250);
   border-radius: 1em;
+  max-height: 50vh;
+  overflow-y: auto;
 }
 
 .c-modal-overlay {

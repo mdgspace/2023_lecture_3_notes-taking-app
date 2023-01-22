@@ -9,7 +9,7 @@ const Signup = () => {
   const HandleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8000/users/signup/", {
+      await axios.post("https://nanonish.pythonanywhere.com/users/signup/", {
         username: username,
         password: password,
       });

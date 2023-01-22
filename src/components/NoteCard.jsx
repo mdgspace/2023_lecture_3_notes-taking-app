@@ -17,9 +17,12 @@ const NoteCard = ({ note, deleteNote, updateNote }) => {
   const HandlePin = async () => {
     const togglePin = !isPInned;
     try {
-      const res = await axios.patch(`http://localhost:8000/notes/${note.id}`, {
-        isPin: togglePin,
-      });
+      const res = await axios.patch(
+        `https://nanonish.pythonanywhere.com/notes/${note.id}`,
+        {
+          isPin: togglePin,
+        }
+      );
       const data = res.data;
       const updatedNote = {
         title: data.title,
@@ -37,7 +40,9 @@ const NoteCard = ({ note, deleteNote, updateNote }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8000/notes/${note.id}`);
+      await axios.delete(
+        `https://nanonish.pythonanywhere.com/notes/${note.id}`
+      );
       deleteNote(note.id);
       alert("Deleted");
     } catch (error) {
@@ -47,7 +52,7 @@ const NoteCard = ({ note, deleteNote, updateNote }) => {
 
   return (
     <>
-      <div className="card">
+      <div className="c-card">
         <div className="btns">
           <div className="pin" onClick={HandlePin}>
             {isPInned ? <BsPinAngleFill /> : <BsPinAngle />}

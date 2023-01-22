@@ -7,10 +7,13 @@ const Login = () => {
   const HandleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const resp = await axios.post("http://localhost:8000/users/signin/", {
-        username: username,
-        password: password,
-      });
+      const resp = await axios.post(
+        "https://nanonish.pythonanywhere.com/users/signin/",
+        {
+          username: username,
+          password: password,
+        }
+      );
       localStorage.setItem("username", resp.data);
       navigate("/");
       window.location.reload();

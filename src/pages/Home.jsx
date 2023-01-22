@@ -36,7 +36,7 @@ const Home = () => {
           return;
         }
         const response = await axios.get(
-          `http://localhost:8000/notes/${username}`
+          `https://nanonish.pythonanywhere.com/notes/${username}`
         );
         const data = response.data;
         setNotes(reorderNotes(data));

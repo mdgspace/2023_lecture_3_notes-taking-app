@@ -11,7 +11,10 @@ const NewNoteModal = ({ setNewNoteModal, addNote }) => {
         title: title,
         text: description,
       };
-      const res = await axios.post("http://localhost:8000/notes/", newNote);
+      const res = await axios.post(
+        "https://nanonish.pythonanywhere.com/notes/",
+        newNote
+      );
       const data = res.data;
 
       const note = {

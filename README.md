@@ -19,7 +19,7 @@ This repo contains frontend code for web version of notes taking app under the M
 
 - Linux
 
-  - Run `sudo apt install nodejs` in the terminal to install the LTS version.
+  - Run `sudo apt install nodejs npm` in the terminal to install the LTS version.
 
 ---
 
